@@ -5,6 +5,12 @@ import { JwtPayload, Secret, sign, verify } from 'jsonwebtoken'
 import httpStatus from 'http-status'
 import ApiError from '../errors/apiError'
 
+export interface VerifiedUser extends JwtPayload {
+  id: string
+  role: string
+  // Add other properties if needed
+}
+
 const createToken = (
   payload: Record<string, unknown>,
   tokenType: 'access' | 'refresh',
@@ -20,9 +26,9 @@ const createToken = (
   }
 }
 
-const verifyToken = (token: string, secret: Secret): JwtPayload => {
+const verifyToken = (token: string, secret: Secret): VerifiedUser => {
   try {
-    return verify(token, secret) as JwtPayload
+    return verify(token, secret) as VerifiedUser
   } catch (error) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Invalid token')
   }

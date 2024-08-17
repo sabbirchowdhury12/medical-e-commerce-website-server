@@ -1,17 +1,17 @@
 import { startSession } from 'mongoose'
 import { hashPassword, matchPassword } from '../../../helper/bcrypt'
 import { User } from './auth.model'
-import { Profile } from '../profile/model'
+import { Profile } from '../profile/profile.model'
 import ApiError from '../../../errors/apiError'
 import { createToken } from '../../../helper/jwt'
+import {
+  TLogin,
+  TLoginResponse,
+  TRegister,
+  TRegisterResponse,
+} from './auth.interface'
 
-const login = async ({
-  email,
-  password,
-}: {
-  email: string
-  password: string
-}): Promise<{ accessToken: string; refreshToken: string }> => {
+const login = async ({ email, password }: TLogin): Promise<TLoginResponse> => {
   // Find the user by email
   const user = await User.findOne({ email })
 
@@ -32,7 +32,11 @@ const login = async ({
   return { accessToken, refreshToken }
 }
 
-const register = async ({ email, password, ...others }) => {
+const register = async ({
+  email,
+  password,
+  ...others
+}: TRegister): Promise<TRegisterResponse> => {
   password = await hashPassword(password)
 
   // Check if the environment supports transactions
