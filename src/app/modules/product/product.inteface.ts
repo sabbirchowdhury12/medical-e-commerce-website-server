@@ -1,6 +1,6 @@
 import { Document, Model, Schema } from 'mongoose'
 
-export interface Variant {
+export interface IVariant {
   variantId: string
   name: string
   price: number
@@ -17,7 +17,7 @@ export interface ProductDocument extends Document {
   status: 'active' | 'inactive'
   categoryId: Schema.Types.ObjectId
   categoryName: string
-  variants: Variant[]
+  variants: IVariant[]
   defaultPrice: number
 }
 

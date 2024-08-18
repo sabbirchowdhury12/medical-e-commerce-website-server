@@ -1,5 +1,4 @@
 import { Router } from 'express'
-
 import validateRequest from '../../middlewares/validateRequest'
 import { ZCategoryCreate, ZCategoryUpdate } from './category.validation'
 import { CategoryService } from './category.service'
