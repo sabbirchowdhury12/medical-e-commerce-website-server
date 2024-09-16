@@ -1,13 +1,7 @@
-import mongoose, { Schema } from 'mongoose'
-import { ProductDocument, ProductModel, IVariant } from './product.inteface'
+import { model, Schema } from 'mongoose'
+import { ProductDocument, ProductModel } from './product.inteface'
 
-const VariantSchema = new Schema<IVariant>({
-  variantId: { type: String, required: true },
-  name: { type: String, required: true },
-  price: { type: Number, required: true },
-})
-
-const ProductSchema = new mongoose.Schema<ProductDocument>(
+const ProductSchema = new Schema<ProductDocument>(
   {
     name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
@@ -17,10 +11,10 @@ const ProductSchema = new mongoose.Schema<ProductDocument>(
     company: { type: String, required: true },
     discount: { type: Number, required: true },
     stockStatus: { type: Boolean, required: true },
-    status: { type: String, enum: ['active', 'inactive'], required: true },
-    categoryId: { type: Schema.Types.ObjectId, require: true },
+    categoryId: { type: Schema.Types.ObjectId, ref: 'Categories' },
     categoryName: { type: String, required: true },
-    variants: { type: [VariantSchema], required: true },
+    subCategory: { type: String, required: true },
+    variants: [{ type: Schema.Types.ObjectId, ref: 'Variant' }], // Correct reference
     defaultPrice: { type: Number, required: true },
   },
   {
@@ -28,9 +22,8 @@ const ProductSchema = new mongoose.Schema<ProductDocument>(
   },
 )
 
-export const Product = mongoose.model<ProductDocument, ProductModel>(
+// Model
+export const Product = model<ProductDocument, ProductModel>(
   'Product',
   ProductSchema,
 )
-
-export const Variant = mongoose.model<IVariant>('Variant', VariantSchema)

@@ -3,8 +3,9 @@ import { CategoryDocument, CategoryModel } from './category.inteface'
 
 const CategorySchema = new Schema<CategoryDocument>(
   {
-    title: { type: String, required: true },
+    name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
+    subCategory: [{ type: String, required: true }],
   },
   {
     timestamps: true,
@@ -12,7 +13,7 @@ const CategorySchema = new Schema<CategoryDocument>(
 )
 
 const Category = model<CategoryDocument, CategoryModel>(
-  'Category',
+  'Categories',
   CategorySchema,
 )
 

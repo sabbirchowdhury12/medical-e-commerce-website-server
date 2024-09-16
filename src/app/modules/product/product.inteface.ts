@@ -1,10 +1,7 @@
-import { Document, Model, Schema } from 'mongoose'
+import { Schema, Document, Model } from 'mongoose'
+import { IVariant } from '../variant/variant.interface'
 
-export interface IVariant {
-  variantId: string
-  name: string
-  price: number
-}
+// Product Interface
 export interface ProductDocument extends Document {
   name: string
   slug: string
@@ -14,11 +11,15 @@ export interface ProductDocument extends Document {
   discount: number
   company: string
   stockStatus: boolean
-  status: 'active' | 'inactive'
   categoryId: Schema.Types.ObjectId
   categoryName: string
-  variants: IVariant[]
+  subCategory: string
+  variants: Schema.Types.ObjectId[] | IVariant[]
   defaultPrice: number
 }
 
 export type ProductModel = Model<ProductDocument>
+
+export type IProductFilters = {
+  searchTerm?: string
+}

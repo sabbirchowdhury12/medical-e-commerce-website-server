@@ -1,64 +1,64 @@
-import { VariantService } from './Variant.service'
+import { CategoryService } from './category.service'
 import { Request, Response } from 'express'
 import catchAsync from '../../../shared/catchAsync'
 import sendResponse from '../../../shared/sendResponse'
-import { VariantDocument } from './Variant.inteface'
+import { CategoryDocument } from './category.inteface'
 
 const insertToDB = catchAsync(async (req: Request, res: Response) => {
-  const data = await VariantService.insertToDB(req.body)
+  const data = await CategoryService.insertToDB(req.body)
 
-  sendResponse<VariantDocument>(res, {
+  sendResponse<CategoryDocument>(res, {
     statusCode: 200,
     success: true,
-    message: 'Variant created successfully!',
+    message: 'Category created successfully!',
     data,
   })
 })
 const updateToDB = catchAsync(async (req: Request, res: Response) => {
-  const data = await VariantService.updateToDB(req.params.id, req.body)
+  const data = await CategoryService.updateToDB(req.params.id, req.body)
 
-  sendResponse<VariantDocument>(res, {
+  sendResponse<CategoryDocument>(res, {
     statusCode: 200,
     success: true,
-    message: 'Variant updated successfully!',
+    message: 'Category updated successfully!',
     data,
   })
 })
 
 const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
-  const data = await VariantService.getAllFromDB()
+  const data = await CategoryService.getAllFromDB()
 
-  sendResponse<VariantDocument[]>(res, {
+  sendResponse<CategoryDocument[]>(res, {
     statusCode: 200,
     success: true,
-    message: 'Variants retrieved successfully!',
+    message: 'Categorys retrieved successfully!',
     data,
   })
 })
 
 const getFromDB = catchAsync(async (req: Request, res: Response) => {
-  const data = await VariantService.getFromDB(req.params.id)
+  const data = await CategoryService.getFromDB(req.params.id)
 
-  sendResponse<VariantDocument>(res, {
+  sendResponse<CategoryDocument>(res, {
     statusCode: 200,
     success: true,
-    message: 'Variant retrieved successfully!',
+    message: 'Category retrieved successfully!',
     data,
   })
 })
 
 const deleteFromDB = catchAsync(async (req: Request, res: Response) => {
-  const data = await VariantService.deleteFromDB(req.params.id)
+  const data = await CategoryService.deleteFromDB(req.params.id)
 
-  sendResponse<VariantDocument>(res, {
+  sendResponse<CategoryDocument>(res, {
     statusCode: 200,
     success: true,
-    message: 'Variant Deleted successfully!',
+    message: 'Category Deleted successfully!',
     data,
   })
 })
 
-export const VariantController = {
+export const CategoryController = {
   insertToDB,
   updateToDB,
   getAllFromDB,

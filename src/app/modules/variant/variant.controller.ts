@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import catchAsync from '../../../shared/catchAsync'
 import sendResponse from '../../../shared/sendResponse'
-import { IVariant } from '../product/product.inteface'
 import { VariantService } from './variant.service'
+import { IVariant } from './variant.interface'
 
 const insertToDB = catchAsync(async (req: Request, res: Response) => {
   const data = await VariantService.insertToDB(req.body)
@@ -10,7 +10,7 @@ const insertToDB = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IVariant>(res, {
     statusCode: 200,
     success: true,
-    message: 'Category created successfully!',
+    message: 'Variant created successfully!',
     data,
   })
 })
@@ -20,7 +20,7 @@ const updateToDB = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IVariant>(res, {
     statusCode: 200,
     success: true,
-    message: 'Category updated successfully!',
+    message: 'Variant updated successfully!',
     data,
   })
 })
@@ -31,7 +31,7 @@ const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IVariant[]>(res, {
     statusCode: 200,
     success: true,
-    message: 'Categorys retrieved successfully!',
+    message: 'Variants retrieved successfully!',
     data,
   })
 })
@@ -42,7 +42,7 @@ const getFromDB = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IVariant>(res, {
     statusCode: 200,
     success: true,
-    message: 'Category retrieved successfully!',
+    message: 'Variant retrieved successfully!',
     data,
   })
 })
@@ -53,12 +53,12 @@ const deleteFromDB = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IVariant>(res, {
     statusCode: 200,
     success: true,
-    message: 'Category Deleted successfully!',
+    message: 'Variant Deleted successfully!',
     data,
   })
 })
 
-export const CategoryController = {
+export const VariantController = {
   insertToDB,
   updateToDB,
   getAllFromDB,

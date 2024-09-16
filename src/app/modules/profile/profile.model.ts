@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 import { IProfile, ProfileModel } from './profile.interface'
 
 const ProfileSchema = new mongoose.Schema<IProfile>(
@@ -8,6 +8,7 @@ const ProfileSchema = new mongoose.Schema<IProfile>(
     isVerified: { type: Boolean, default: false },
     conatactNo: { type: String },
     address: { type: String },
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   },
   { versionKey: false },
 )

@@ -4,10 +4,10 @@ import { ProfileController } from './profile.controller'
 const router = Router()
 
 router
-  .post('/create-profile', ProfileController.createProfile)
-  .get('/', ProfileController.createProfile)
-  .get('/:id', ProfileController.createProfile)
-  .patch('/', ProfileController.createProfile)
-  .delete('/', ProfileController.createProfile)
+  // .post('/create-profile', ProfileController.updateProfile)
+  .patch('/', ProfileController.updateProfile)
+  .get('/:id', ProfileController.getProfile)
+  .get('/', ProfileController.getProfiles)
+  .delete('/', ProfileController.deleteProfile)
 
 export const profileRoutes = router

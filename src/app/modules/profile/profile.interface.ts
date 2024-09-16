@@ -1,4 +1,4 @@
-import { Model } from 'mongoose'
+import { Model, Types } from 'mongoose'
 
 export type IProfile = {
   name: string
@@ -6,6 +6,7 @@ export type IProfile = {
   image: string
   isVerified: boolean
   conatactNo: string
+  userId: Types.ObjectId
 }
 
 export type ProfileModel = Model<IProfile>

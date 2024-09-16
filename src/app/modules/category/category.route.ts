@@ -1,23 +1,19 @@
 import { Router } from 'express'
 import validateRequest from '../../middlewares/validateRequest'
 import { ZCategoryCreate, ZCategoryUpdate } from './category.validation'
-import { CategoryService } from './category.service'
+import { CategoryController } from './category.controller'
 
 const router = Router()
 
 router
-  .post(
-    '/create-category',
-    validateRequest(ZCategoryCreate),
-    CategoryService.insertToDB,
-  )
+  .post('/', validateRequest(ZCategoryCreate), CategoryController.insertToDB)
+  .get('/', CategoryController.getAllFromDB)
+  .get('/:id', CategoryController.getFromDB)
   .patch(
-    '/update-category',
+    '/:id',
     validateRequest(ZCategoryUpdate),
-    CategoryService.updateToDB,
+    CategoryController.updateToDB,
   )
-  .get('/', CategoryService.updateToDB)
-  .get('/:id', CategoryService.updateToDB)
-  .delete('/:id', CategoryService.updateToDB)
+  .delete('/:id', CategoryController.deleteFromDB)
 
-export const authRoutes = router
+export const categoryRoutes = router

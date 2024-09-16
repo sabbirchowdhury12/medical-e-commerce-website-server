@@ -4,14 +4,12 @@ import { User } from './auth.model'
 import { Profile } from '../profile/profile.model'
 import ApiError from '../../../errors/apiError'
 import { createToken } from '../../../helper/jwt'
-import {
-  TLogin,
-  TLoginResponse,
-  TRegister,
-  TRegisterResponse,
-} from './auth.interface'
+import { TLogin, TRegister, TRegisterResponse } from './auth.interface'
 
-const login = async ({ email, password }: TLogin): Promise<TLoginResponse> => {
+const login = async ({
+  email,
+  password,
+}: TLogin): Promise<TRegisterResponse> => {
   // Find the user by email
   const user = await User.findOne({ email })
 
@@ -25,11 +23,14 @@ const login = async ({ email, password }: TLogin): Promise<TLoginResponse> => {
   // Extract the necessary details for token generation
   const { _id: id, role } = user
 
+  const profile = await Profile.findOne({ userId: id })
+  if (!profile) throw new ApiError(404, "Profile doesn't exist!")
+
   // Generate tokens
   const accessToken = createToken({ id, role }, 'access')
   const refreshToken = createToken({ id, role }, 'refresh')
 
-  return { accessToken, refreshToken }
+  return { user: profile, accessToken, refreshToken }
 }
 
 const register = async ({
@@ -53,10 +54,14 @@ const register = async ({
       [{ email, password }],
       session ? { session } : {},
     )
+
+    console.log(user)
+    console.log(user[0])
     const profile = await Profile.create(
       [{ userId: user[0]._id, ...others }],
       session ? { session } : {},
     )
+    console.log(profile)
 
     if (!user[0] || !profile[0])
       throw new ApiError(400, 'Failed to create user!', '')

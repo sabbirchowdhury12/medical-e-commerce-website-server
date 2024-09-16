@@ -5,9 +5,10 @@ type IResponseData<T> = {
   success: boolean
   message: string | null
   meta?: {
-    page: number
-    limit: number
-    total: number
+    page?: number
+    limit?: number
+    total?: number
+    skip?: number
   } | null
   data: T | null
 }

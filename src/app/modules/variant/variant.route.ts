@@ -1,22 +1,21 @@
-import { VariantController } from './../category/category.controller'
-
 import { Router } from 'express'
+import { VariantController } from './variant.controller'
 
 const router = Router()
 
 router
   .post(
-    '/create-variant',
+    '',
 
     VariantController.insertToDB,
   )
   .patch(
-    '/update-variant',
+    '',
 
     VariantController.updateToDB,
   )
-  .get('/', VariantController.updateToDB)
-  .get('/:id', VariantController.updateToDB)
-  .delete('/:id', VariantController.updateToDB)
+  .get('/', VariantController.getAllFromDB)
+  .get('/:id', VariantController.getFromDB)
+  .delete('/:id', VariantController.deleteFromDB)
 
-export const authRoutes = router
+export const variantRoutes = router

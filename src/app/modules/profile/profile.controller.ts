@@ -27,6 +27,7 @@ const getProfiles = catchAsync(async (req: Request, res: Response) => {
 })
 
 const getProfile = catchAsync(async (req: Request, res: Response) => {
+  console.log(req.params.id)
   const data = await ProfileService.getProfile(req.params.id)
 
   sendResponse<IProfile>(res, {

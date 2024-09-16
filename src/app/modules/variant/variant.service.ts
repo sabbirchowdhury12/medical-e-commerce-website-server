@@ -1,5 +1,5 @@
-import { IVariant } from '../product/product.inteface'
-import { Variant } from '../product/product.model'
+import { IVariant } from './variant.interface'
+import { Variant } from './variant.model'
 
 const insertToDB = async (payload: IVariant): Promise<IVariant | null> => {
   const category = await Variant.create(payload)

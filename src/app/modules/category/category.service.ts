@@ -23,7 +23,9 @@ const getAllFromDB = async (): Promise<CategoryDocument[]> => {
 }
 
 const getFromDB = async (id: string): Promise<CategoryDocument | null> => {
-  const result = await Category.findOne({ id })
+  console.log(id)
+  const result = await Category.findById(id).exec()
+  console.log(result)
   return result
 }
 
