@@ -89,6 +89,7 @@ const getBySubCategory = async (id: string): Promise<ProductDocument[]> => {
 
 const getFromDB = async (id: string): Promise<ProductDocument | null> => {
   try {
+    // const result = await Product.findById(id).populate('variants').exec()
     const result = await Product.findById(id).populate('variants').exec()
     return result
   } catch (error) {
