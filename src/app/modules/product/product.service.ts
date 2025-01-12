@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Product } from './product.model'
 import { IProductFilters, ProductDocument } from './product.inteface'
@@ -58,7 +57,8 @@ const getAllFromDB = async (
     sortConditions[sortBy] = sortOrder
   }
 
-  const total = await Product.countDocuments()
+  // const total = await Product.countDocuments()
+  // const total = await Product.countDocuments()
   const whereConditon = andConditions.length > 0 ? { $and: andConditions } : {}
 
   const result = await Product.find(whereConditon)
@@ -66,6 +66,7 @@ const getAllFromDB = async (
     .skip(skip)
     .limit(limit)
 
+  const total = (await Product.find(whereConditon)).length
   return {
     meta: {
       page,
@@ -78,6 +79,7 @@ const getAllFromDB = async (
 }
 const getByCategory = async (id: string): Promise<ProductDocument[]> => {
   const result = await Product.find({ categoryId: id }).exec()
+
   return result
 }
 const getBySubCategory = async (id: string): Promise<ProductDocument[]> => {

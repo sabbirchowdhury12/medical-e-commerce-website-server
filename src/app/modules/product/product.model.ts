@@ -11,7 +11,7 @@ const ProductSchema = new Schema<ProductDocument>(
     company: { type: String, required: true },
     discount: { type: Number, required: true },
     stockStatus: { type: Boolean, required: true },
-    categoryId: { type: Schema.Types.ObjectId, ref: 'Categories' },
+    categoryId: { type: String, required: true },
     categoryName: { type: String, required: true },
     subCategory: { type: String, required: true },
     variants: [{ type: Schema.Types.ObjectId, ref: 'Variant' }], // Correct reference
