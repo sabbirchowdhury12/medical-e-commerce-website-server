@@ -66,6 +66,8 @@ const getAllFromDB = async (
     .skip(skip)
     .limit(limit)
 
+  console.log(result)
+
   const total = (await Product.find(whereConditon)).length
   return {
     meta: {

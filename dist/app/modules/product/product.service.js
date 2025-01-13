@@ -21,7 +21,6 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductService = void 0;
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const product_model_1 = require("./product.model");
 const product_constant_1 = require("./product.constant");
@@ -61,12 +60,15 @@ const getAllFromDB = (filters, paginationOptions) => __awaiter(void 0, void 0, v
     if (sortBy && sortOrder) {
         sortConditions[sortBy] = sortOrder;
     }
-    const total = yield product_model_1.Product.countDocuments();
+    // const total = await Product.countDocuments()
+    // const total = await Product.countDocuments()
     const whereConditon = andConditions.length > 0 ? { $and: andConditions } : {};
     const result = yield product_model_1.Product.find(whereConditon)
         .sort(sortConditions)
         .skip(skip)
         .limit(limit);
+    console.log(result);
+    const total = (yield product_model_1.Product.find(whereConditon)).length;
     return {
         meta: {
             page,
@@ -87,6 +89,7 @@ const getBySubCategory = (id) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const getFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        // const result = await Product.findById(id).populate('variants').exec()
         const result = yield product_model_1.Product.findById(id).populate('variants').exec();
         return result;
     }
