@@ -11,6 +11,7 @@ const validateRequest_1 = __importDefault(require("../../middlewares/validateReq
 const router = (0, express_1.Router)();
 router
     .post('/', (0, validateRequest_1.default)(product_validation_1.ZProductCreate), product_controller_1.ProductController.insertToDB)
+    .get('/get-all', product_controller_1.ProductController.getAllProduct)
     .patch('/', (0, validateRequest_1.default)(product_validation_1.ZProductUpdate), product_controller_1.ProductController.updateToDB)
     .get('/', product_controller_1.ProductController.getAllFromDB)
     .get('/category/:id', product_controller_1.ProductController.getByCategory)

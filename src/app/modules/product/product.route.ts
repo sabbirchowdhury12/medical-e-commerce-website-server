@@ -7,6 +7,7 @@ const router = Router()
 
 router
   .post('/', validateRequest(ZProductCreate), ProductController.insertToDB)
+  .get('/get-all', ProductController.getAllProduct)
   .patch('/', validateRequest(ZProductUpdate), ProductController.updateToDB)
   .get('/', ProductController.getAllFromDB)
   .get('/category/:id', ProductController.getByCategory)

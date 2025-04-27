@@ -67,7 +67,7 @@ const getAllFromDB = (filters, paginationOptions) => __awaiter(void 0, void 0, v
         .sort(sortConditions)
         .skip(skip)
         .limit(limit);
-    console.log(result);
+    // console.log(result)
     const total = (yield product_model_1.Product.find(whereConditon)).length;
     return {
         meta: {
@@ -102,6 +102,10 @@ const deleteFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield product_model_1.Product.findByIdAndDelete(id).exec();
     return result;
 });
+const getAllProduct = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.Product.find();
+    return result;
+});
 exports.ProductService = {
     insertToDB,
     updateToDB,
@@ -110,4 +114,5 @@ exports.ProductService = {
     deleteFromDB,
     getByCategory,
     getBySubCategory,
+    getAllProduct,
 };

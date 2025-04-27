@@ -75,6 +75,17 @@ const deleteFromDB = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const getAllProduct = catchAsync(async (req: Request, res: Response) => {
+  const data = await ProductService.getAllProduct()
+
+  sendResponse<ProductDocument[]>(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Products retrieved successfully!',
+    data: data,
+  })
+})
+
 export const ProductController = {
   insertToDB,
   updateToDB,
@@ -82,4 +93,5 @@ export const ProductController = {
   getFromDB,
   deleteFromDB,
   getByCategory,
+  getAllProduct,
 }

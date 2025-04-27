@@ -18,6 +18,7 @@ const config_1 = __importDefault(require("./config"));
 function dbConnect() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            // console.log(config.database_url)
             yield mongoose_1.default.connect(config_1.default.database_url);
             // logger.info(config.database_url)
             console.log('database connect successfully');
@@ -26,6 +27,7 @@ function dbConnect() {
             });
         }
         catch (err) {
+            console.log(err, 'err');
             console.log('database connect failed', err);
         }
     });

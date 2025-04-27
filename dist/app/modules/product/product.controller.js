@@ -76,6 +76,15 @@ const deleteFromDB = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
         data,
     });
 }));
+const getAllProduct = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = yield product_service_1.ProductService.getAllProduct();
+    (0, sendResponse_1.default)(res, {
+        statusCode: 200,
+        success: true,
+        message: 'Products retrieved successfully!',
+        data: data,
+    });
+}));
 exports.ProductController = {
     insertToDB,
     updateToDB,
@@ -83,4 +92,5 @@ exports.ProductController = {
     getFromDB,
     deleteFromDB,
     getByCategory,
+    getAllProduct,
 };

@@ -66,7 +66,7 @@ const getAllFromDB = async (
     .skip(skip)
     .limit(limit)
 
-  console.log(result)
+  // console.log(result)
 
   const total = (await Product.find(whereConditon)).length
   return {
@@ -104,6 +104,10 @@ const deleteFromDB = async (id: string): Promise<ProductDocument | null> => {
   const result = await Product.findByIdAndDelete(id).exec()
   return result
 }
+const getAllProduct = async () => {
+  const result = await Product.find()
+  return result
+}
 
 export const ProductService = {
   insertToDB,
@@ -113,4 +117,5 @@ export const ProductService = {
   deleteFromDB,
   getByCategory,
   getBySubCategory,
+  getAllProduct,
 }
