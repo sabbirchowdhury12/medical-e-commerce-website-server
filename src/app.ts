@@ -8,7 +8,10 @@ const app: Application = express()
 // Middlewares
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: [
+      'http://localhost:3000',
+      'https://pharmaplus-sabbirchowdhury12.vercel.app/',
+    ],
     credentials: true,
   }),
 )
